@@ -1,15 +1,20 @@
 import createBoard from './board';
-import { bottleArengment } from './bottle';
+import { bottleArengment, createBottle } from './bottle';
 
 class Robot {
-  constructor(gen = 0) {
+  constructor(gen, robot, board) {
     this.positionX = Math.floor(Math.random() * 10);
     this.positionY = Math.floor(Math.random() * 10);
     this.moveArray = [];
     this.moveCount = 0;
     this.bottlePickUp = 0;
     this.gen = gen;
-    this.robotCount = 0;
+    this.robotCount = robot;
+    this.boardCount = board;
+  }
+
+  changeGeneration() {
+    document.getElementById('generation').textContent = this.gen;
   }
 
   createMoveArray(positionX = this.positionX, positionY = this.positionY) {
@@ -111,8 +116,23 @@ class Robot {
       // case 'pickUp':
       //   this.checkBottle();
       //   break;
-      case 'stop':
-        break;
+      // case 'stop':
+      //   for (let generation = 0; generation < 2; generation++) {
+      //     document.getElementById('generation').textContent = generation;
+      //     for (let board = 0; board < 3; board++) {
+      //       document.getElementById('boardCount').textContent = board;
+      //       for (let robot = 0; robot < 3; robot++) {
+      //         document.getElementById('robotCount').textContent = robot;
+      //         createBottle();
+      //         createBoard();
+      //         const robot = new Robot();
+      //         robot.changeGeneration();
+      //         robot.createMoveArray();
+      //         robot.changePosition();
+      //       }
+      //     }
+      //   }
+      //   break;
       default:
         console.log('Ups!');
         this.createMoveArray();

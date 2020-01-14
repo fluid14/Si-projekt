@@ -2,14 +2,14 @@ import '../style.css';
 import Robot from './robot';
 import { createBottle, bottleArengment } from './bottle';
 
-for (let i = 0; i < 1; i++) {
-  createBottle();
+// for (let i = 0; i < 1; i++) {
+// createBottle();
 
-  const robot = new Robot(i);
-
-  robot.createMoveArray();
-  robot.changePosition();
-}
+// const robot = new Robot(0);
+// robot.changeGeneration();
+// robot.createMoveArray();
+// robot.changePosition();
+// // }
 document.onkeydown = checkKey;
 
 function checkKey(e) {
