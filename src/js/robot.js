@@ -116,23 +116,23 @@ class Robot {
       // case 'pickUp':
       //   this.checkBottle();
       //   break;
-      // case 'stop':
-      //   for (let generation = 0; generation < 2; generation++) {
-      //     document.getElementById('generation').textContent = generation;
-      //     for (let board = 0; board < 3; board++) {
-      //       document.getElementById('boardCount').textContent = board;
-      //       for (let robot = 0; robot < 3; robot++) {
-      //         document.getElementById('robotCount').textContent = robot;
-      //         createBottle();
-      //         createBoard();
-      //         const robot = new Robot();
-      //         robot.changeGeneration();
-      //         robot.createMoveArray();
-      //         robot.changePosition();
-      //       }
-      //     }
-      //   }
-      //   break;
+      case 'stop':
+        //   for (let generation = 0; generation < 2; generation++) {
+        //     document.getElementById('generation').textContent = generation;
+        //     for (let board = 0; board < 3; board++) {
+        //       document.getElementById('boardCount').textContent = board;
+        //       for (let robot = 0; robot < 3; robot++) {
+        //         document.getElementById('robotCount').textContent = robot;
+        //         createBottle();
+        //         createBoard();
+        //         const robot = new Robot();
+        //         robot.changeGeneration();
+        //         robot.createMoveArray();
+        //         robot.changePosition();
+        //       }
+        //     }
+        //   }
+        break;
       default:
         console.log('Ups!');
         this.createMoveArray();
