@@ -59,16 +59,17 @@ class Robot {
     }
   }
 
-  sendPosition(moveArray = this.moveArray) {
+  async sendPosition(moveArray = this.moveArray) {
     const ob = {
       robotPositionX: this.positionX,
       robotPositionY: this.positionY,
       bottleArengment: bottleArengment,
       moveCount: this.moveCount,
-      bottleCount: this.bottlePickUp
+      bottleCount: this.bottlePickUp,
+      robotNumber: this.robotCount
     };
 
-    fetch('http://localhost:3000/data', {
+    await fetch('http://localhost:3000/data', {
       method: 'post',
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
@@ -117,21 +118,6 @@ class Robot {
       //   this.checkBottle();
       //   break;
       case 'stop':
-        //   for (let generation = 0; generation < 2; generation++) {
-        //     document.getElementById('generation').textContent = generation;
-        //     for (let board = 0; board < 3; board++) {
-        //       document.getElementById('boardCount').textContent = board;
-        //       for (let robot = 0; robot < 3; robot++) {
-        //         document.getElementById('robotCount').textContent = robot;
-        //         createBottle();
-        //         createBoard();
-        //         const robot = new Robot();
-        //         robot.changeGeneration();
-        //         robot.createMoveArray();
-        //         robot.changePosition();
-        //       }
-        //     }
-        //   }
         break;
       default:
         console.log('Ups!');

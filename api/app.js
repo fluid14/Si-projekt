@@ -23,7 +23,7 @@ function checkDirectorySync(directory) {
 }
 
 let dna = {};
-const randomMove = (robotSeesArray, moveCount, bottleCount) => {
+const randomMove = (robotSeesArray, moveCount, bottleCount, robot) => {
   let moveName = 'stop';
   if (moveCount < 50) {
     if (moveCount <= 1) {
@@ -45,9 +45,9 @@ const randomMove = (robotSeesArray, moveCount, bottleCount) => {
     dna.bottleCount = bottleCount;
     dna[robotSeesArray] = moveName;
     let data1 = JSON.stringify(dna);
-    mkdirp('dna/gen_1/rob_1', function(err) {
+    mkdirp(`dna/gen_1/`, function(err) {
       try {
-        fs.writeFileSync('dna/gen_1/rob_1/pl_1.json', data1);
+        fs.writeFileSync(`dna/gen_1/rob_${robot}.json`, data1);
       } catch {
         console.log(`mkdirp: ${err}`);
       }
@@ -56,29 +56,55 @@ const randomMove = (robotSeesArray, moveCount, bottleCount) => {
   return moveName;
 };
 
+let moves = 0;
 app.post('/data', (req, res) => {
-  console.clear();
+  // console.clear();
   const robotPositionX = req.body.robotPositionX;
   const robotPositionY = req.body.robotPositionY;
   const bottleArengment = req.body.bottleArengment;
   const bottleCount = req.body.bottleCount;
   const moveCount = req.body.moveCount;
+  const robotNumber = req.body.robotNumber;
 
-  console.log(robotPositionX);
-  console.log(robotPositionY);
+  // console.log(robotPositionX);
+  // console.log(robotPositionY);
   console.log(bottleArengment);
-  console.log(moveCount);
-  console.log(bottleCount);
+  // console.log(moveCount);
+  // console.log(bottleCount);
 
   const moveName = randomMove(
     robotSess(bottleArengment, robotPositionX, robotPositionY),
     moveCount,
-    bottleCount
+    bottleCount,
+    robotNumber
   );
 
-  console.log(moveName);
+  moves++;
+  // console.log(moves);
+  // console.log(moveName);
+  // console.log(robotNumber);
 
   res.json(`${moveName}`);
 });
 
+// test
+
+for (let generation = 0; generation < 3; generation++) {
+  for (let board = 0; board < 3; board++) {
+    let boardArrayTest = [];
+    for (let i = 0; i < 10; i++) {
+      boardArrayTest[i] = [];
+    }
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        boardArrayTest[i][j] = 0;
+      }
+    }
+
+    console.log(boardArrayTest);
+    for (let bot = 0; bot < 3; bot++) {
+      console.log(`Gen: ${generation} || Board: ${board} || Bot: ${bot}`);
+    }
+  }
+}
 app.listen(port, () => console.log(`http://localhost:${port}`));
