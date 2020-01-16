@@ -37,7 +37,7 @@ class Robot {
     // this.sendPosition();
   }
 
-  move(move, bottleAregment) {
+  move(move) {
     switch (move) {
       case 'up':
         if (this.positionX - 1 >= 0 && this.moveCount <= 50) {
