@@ -73,7 +73,6 @@ class Robot {
         break;
       default:
         console.log('Ups!');
-        this.createMoveArray();
         break;
     }
   }
