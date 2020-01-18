@@ -21,5 +21,5 @@ export const createBottle = () => {
     bottleArengment[x][y] = 1;
     console.log(`${x}, ${y}`);
   }
-  console.log(bottleArengment);
+  return bottleArengment;
 };

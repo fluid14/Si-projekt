@@ -1,6 +1,7 @@
 import createBoard from './board';
-import { bottleArengment, createBottle } from './bottle';
+import { createBottle } from './bottle';
 
+let bottleArengment = createBottle();
 class Robot {
   constructor(gen, robot, board) {
     this.positionX = Math.floor(Math.random() * 10);
@@ -18,24 +19,24 @@ class Robot {
   }
 
   createMoveArray(positionX = this.positionX, positionY = this.positionY) {
-    // setTimeout(() => {
-    createBoard();
-    for (let i = 0; i < 10; i++) {
-      this.moveArray[i] = [];
-    }
-
-    for (let i = 0; i < 10; i++) {
-      for (let j = 0; j < 10; j++) {
-        let x = 0;
-        if (i == positionX && j == positionY) {
-          x = 2;
-        }
-        this.moveArray[i][j] = x;
+    setTimeout(() => {
+      createBoard();
+      for (let i = 0; i < 10; i++) {
+        this.moveArray[i] = [];
       }
-    }
-    this.checkBottle();
-    this.sendPosition();
-    // }, 100);
+
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          let x = 0;
+          if (i == positionX && j == positionY) {
+            x = 2;
+          }
+          this.moveArray[i][j] = x;
+        }
+      }
+      this.checkBottle();
+      this.sendPosition();
+    }, 500);
     // console.log(this.moveArray);
   }
 
@@ -63,25 +64,23 @@ class Robot {
     const ob = {
       robotPositionX: this.positionX,
       robotPositionY: this.positionY,
-      bottleArengment: bottleArengment,
-      moveCount: this.moveCount,
-      bottleCount: this.bottlePickUp,
-      robotNumber: this.robotCount
+      bottleArengment: bottleArengment
     };
-
-    await fetch('http://localhost:3000/data', {
-      method: 'post',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8'
-      },
-      body: JSON.stringify(ob)
-    })
-      .then(res => res.json())
-      .then(res => {
-        console.log(res);
-        this.move(res);
+    if (this.moveCount <= 49) {
+      await fetch('http://localhost:3000/data', {
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(ob)
       })
-      .catch(error => console.log('Error: ', error));
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          this.move(res);
+        })
+        .catch(error => console.log('Error: ', error));
+    }
   }
 
   move(move) {
